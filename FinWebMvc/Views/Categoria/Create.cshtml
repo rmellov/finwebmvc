@@ -1,12 +1,11 @@
-﻿@model FinWebMvc.Models.Categoria
+﻿@using FinWebMvc.Models.Enums
+@model FinWebMvc.Models.Categoria
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Categoria</h4>
+<h4>Incluir categoria</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,20 +18,22 @@
             </div>
             <div class="form-group">
                 <label asp-for="Tipo" class="control-label"></label>
-                <select asp-for="Tipo" class="form-control"></select>
+                <select asp-for="Tipo" class="form-control" asp-items="Html.GetEnumSelectList<ETipoCategoria>()">
+                    <option selected="selected" value=""></option>
+                </select>
                 <span asp-validation-for="Tipo" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-warning">Voltar para a lista</a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
